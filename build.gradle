@@ -1,0 +1,22 @@
+apply plugin: "idea"
+
+ext {
+    moduleProjects = subprojects.findAll()
+}
+
+allprojects {
+    apply plugin: "java"
+    repositories {
+        jcenter()
+    }
+
+    task packageZip(type: Zip) {
+        archiveFileName = "${project.name}.zip"
+        destinationDirectory = file("$buildDir")
+        from "$projectDir/src"
+    }
+}
+
+jar {
+    enabled = false
+}
